@@ -1,0 +1,4 @@
+name: ClearLag
+version: '${project.version}'
+main: com.velloistdev.clearlag.ClearLag
+api-version: '1.21'
