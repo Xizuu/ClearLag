@@ -46,11 +46,17 @@ public class ClearlagTask extends BukkitRunnable {
             interval = plugin.getConfig().getInt("Interval");
 
             for (Player player : Bukkit.getOnlinePlayers()) {
-                player.sendMessage(Objects.requireNonNull(plugin.getConfig().getString("Messages.Cleared")).replace("{PREFIX}", Objects.requireNonNull(plugin.getConfig().getString("Messages.Prefix"))).replace("{COUNT}", String.valueOf(counter)));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("Messages.Cleared"))
+                        .replace("{PREFIX}", Objects.requireNonNull(plugin.getConfig().getString("Messages.Prefix")))
+                        .replace("{COUNT}", String.valueOf(counter))
+                ));
             }
         } else if (plugin.getConfig().getIntegerList("Times").contains(interval)) {
             for (Player player : Bukkit.getOnlinePlayers()) {
-                player.sendMessage(Objects.requireNonNull(plugin.getConfig().getString("Messages.Running")).replace("{PREFIX}", Objects.requireNonNull(plugin.getConfig().getString("Messages.Prefix"))).replace("{SECONDS}", Integer.toString(interval)));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("Messages.Running"))
+                        .replace("{PREFIX}", Objects.requireNonNull(plugin.getConfig().getString("Messages.Prefix")))
+                        .replace("{SECONDS}", Integer.toString(interval))
+                ));
             }
         }
     }
