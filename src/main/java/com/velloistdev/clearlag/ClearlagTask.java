@@ -6,6 +6,7 @@ import org.bukkit.World;
 import org.bukkit.entity.*;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.List;
 import java.util.Objects;
 
 public class ClearlagTask extends BukkitRunnable {
@@ -47,17 +48,33 @@ public class ClearlagTask extends BukkitRunnable {
             interval = plugin.getConfig().getInt("Interval");
 
             for (Player player : Bukkit.getOnlinePlayers()) {
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("Messages.Cleared"))
-                        .replace("{PREFIX}", Objects.requireNonNull(plugin.getConfig().getString("Messages.Prefix")))
-                        .replace("{COUNT}", String.valueOf(counter))
-                ));
+                List<String> message = plugin.getConfig().getStringList("Messages.Cleared");
+                StringBuilder builder = new StringBuilder();
+
+                for (String msg : message) {
+                    if (!msg.trim().isEmpty()) {
+                        builder.append(msg
+                                .replace("{PREFIX}", Objects.requireNonNull(plugin.getConfig().getString("Messages.Prefix")))
+                                .replace("{COUNT}", String.valueOf(counter))
+                        ).append("\n");
+                    }
+                }
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', builder.toString().trim()));
             }
         } else if (plugin.getConfig().getIntegerList("Times").contains(interval)) {
             for (Player player : Bukkit.getOnlinePlayers()) {
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(plugin.getConfig().getString("Messages.Running"))
-                        .replace("{PREFIX}", Objects.requireNonNull(plugin.getConfig().getString("Messages.Prefix")))
-                        .replace("{SECONDS}", Integer.toString(interval))
-                ));
+                List<String> message = plugin.getConfig().getStringList("Messages.Running");
+                StringBuilder builder = new StringBuilder();
+
+                for (String msg : message) {
+                    if (!msg.trim().isEmpty()) {
+                        builder.append(msg
+                                .replace("{PREFIX}", Objects.requireNonNull(plugin.getConfig().getString("Messages.Prefix")))
+                                .replace("{SECONDS}", Integer.toString(interval))
+                        ).append("\n");
+                    }
+                }
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', builder.toString().trim()));
             }
         }
     }
