@@ -8,8 +8,14 @@ Interval: 300
 
 Messages:
   Prefix: "[ClearLag]"
-  Running: "{PREFIX} Entities will be cleared in {SECONDS} seconds"
-  Cleared: "{PREFIX} {COUNT} entities cleared"
+  Running:
+    - ""
+    - "{PREFIX} Entities will be cleared in {SECONDS} seconds"
+    - ""
+  Cleared:
+    - ""
+    - "{PREFIX} {COUNT} entities cleared"
+    - ""
 
 Times:
   - 60
